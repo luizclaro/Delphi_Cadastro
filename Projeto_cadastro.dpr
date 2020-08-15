@@ -2,12 +2,12 @@ program Projeto_cadastro;
 
 uses
   Forms,
-  Cadastro in 'Cadastro.pas' {Form1};
+  Cadastro in 'Cadastro.pas' {CadastroCliente};
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TCadastroCliente, CadastroCliente);
   Application.Run;
 end.

@@ -7,35 +7,38 @@ uses
   Dialogs, StdCtrls, Mask;
 
 type
-  TForm1 = class(TForm)
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
-    Button4: TButton;
-    Edit1: TEdit;
-    Label1: TLabel;
-    Edit2: TEdit;
-    Edit3: TEdit;
-    Edit4: TEdit;
-    Edit5: TEdit;
-    Edit7: TEdit;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
+  TCadastroCliente = class(TForm)
+    ovbNovo: TButton;
+    ovbGravar: TButton;
+    ovbExcluir: TButton;
+    ovbFechar: TButton;
+    ovt_Codigo_Cliente: TEdit;
+    lblCodigoCliente: TLabel;
+    ovtNome: TEdit;
+    ovtEndereco: TEdit;
+    ovtBairro: TEdit;
+    ovtCidade: TEdit;
+    ovtEmail: TEdit;
+    lblNome: TLabel;
+    lblEndereco: TLabel;
+    lblBairro: TLabel;
+    lblCidade: TLabel;
+    lblTelefone: TLabel;
+    lblEmail: TLabel;
     Label8: TLabel;
     Label9: TLabel;
-    MaskEdit1: TMaskEdit;
-    procedure Button4Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
-    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
-    procedure Edit7KeyPress(Sender: TObject; var Key: Char);
-    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    ovtTelefone: TMaskEdit;
+    procedure ovbFecharClick(Sender: TObject);
+    procedure ovbExcluirClick(Sender: TObject);
+    procedure ovt_Codigo_ClienteKeyPress(Sender: TObject; var Key: Char);
+    procedure ovtEmailKeyPress(Sender: TObject; var Key: Char);
+    procedure ovtNomeKeyPress(Sender: TObject; var Key: Char);
 
-    procedure MaskEdit1KeyPress(Sender: TObject; var Key: Char);
-    procedure Button1Click(Sender: TObject);
+    procedure ovtTelefoneKeyPress(Sender: TObject; var Key: Char);
+    procedure ovbNovoClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure ovbGravarClick(Sender: TObject);
+  
   private
     { Private declarations }
   public
@@ -43,89 +46,129 @@ type
   end;
 
 var
-  Form1: TForm1;
-
+  CadastroCliente: TCadastroCliente;
+   var arq: TextFile;
+   var Lista : tstringlist;
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.Button4Click(Sender: TObject);
+procedure TCadastroCliente.ovbFecharClick(Sender: TObject);
 begin
   Close;
 end;
 
-procedure TForm1.Button3Click(Sender: TObject);
+procedure TCadastroCliente.ovbExcluirClick(Sender: TObject);
 begin
-  edit1.SetFocus;
+ovt_Codigo_Cliente.Clear;
+ovtNome.Clear;
+ovtEndereco.Clear;
+ovtBairro.Clear;
+ovtCidade.Clear;
+ovtTelefone.Clear;
+ovtEmail.Clear;
+ovt_Codigo_Cliente.SetFocus;
 end;
 
 
 
-procedure TForm1.Edit1KeyPress(Sender: TObject; var Key: Char);
+procedure TCadastroCliente.ovt_Codigo_ClienteKeyPress(Sender: TObject; var Key:
+Char);
 
 begin
-   
-     if not (key in ['0'..'9',#8,#13,#27] ) then
+              if (Key in ['.', ','])
+                   then if (pos(',', (Sender as TEdit).Text) = 0)
+                       then Key := ','
+                         else Key := #7
+                            else if (not(Key in ['0'..'9',#8,#13,#27]))
+                                then Key := #7;
+
+              //avança com enter
+             if Key = #13 then Perform(Wm_NextDlgCtl,0,0);
+                 if Key = #27 then Close;
+end;
+
+procedure TCadastroCliente.ovtEmailKeyPress(Sender: TObject; var Key: Char);
+begin
+   if not (key in ['A'..'Z','a'..'z','@','!','#','$','%','&','*','0'..'9',#186,
+   #187,#188,#189,#190,#191,#192,#193,#194,#219,#220,#221,#222,#226,#8,#13,
+   #27] ) then
      key := #0;
-     {avança com enter}
-     if Key = #13 then Perform(Wm_NextDlgCtl,0,0);
-
-
-
-
-
-
+           //retorna com esc
+          if Key = #27 then Perform(WM_NEXTDLGCTL,1,0);
 end;
 
-procedure TForm1.Edit7KeyPress(Sender: TObject; var Key: Char);
+
+procedure TCadastroCliente.ovtNomeKeyPress(Sender: TObject; var Key: Char);
 begin
-   if not (key in ['A'..'Z','a'..'z',#8,#13,#27] ) then
-   key := #0;
-
-    {retorna com esc}
-    if Key = #27 then Perform(WM_NEXTDLGCTL,1,0);
-
-
-
-end;
-
-procedure TForm1.Edit2KeyPress(Sender: TObject; var Key: Char);
-begin
-  if not (key in ['A'..'Z','a'..'z',#8,#13,#27] ) then
-   key := #0;
-{avança com enter}
-    if Key = #13 then Perform(Wm_NextDlgCtl,0,0);
-{retorna com esc}
-    if Key = #27 then Perform(WM_NEXTDLGCTL,1,0);
+         if not (key in ['A'..'Z','a'..'z',#8,#13,#27] ) then
+         key := #0;
+             //avança com enter
+             if Key = #13 then Perform(Wm_NextDlgCtl,0,0);
+                 //retorna com esc
+                 if Key = #27 then Perform(WM_NEXTDLGCTL,1,0);
 
 end;
 
 
 
-
-
-
-procedure TForm1.MaskEdit1KeyPress(Sender: TObject; var Key: Char);
+procedure TCadastroCliente.ovtTelefoneKeyPress(Sender: TObject; var Key: Char);
 begin
-if not (key in ['0'..'9',#8,#13,#27] ) then
-key := #0;
-    {avança com enter}
-    if Key = #13 then Perform(Wm_NextDlgCtl,0,0);
-    {retorna com esc}
-    if Key = #27 then Perform(WM_NEXTDLGCTL,1,0);
+      if not (key in ['0'..'9',#8,#13,#27]  ) then
+       key := #0;
+          //avança com enter
+           if Key = #13 then Perform(Wm_NextDlgCtl,0,0);
+               //retorna com esc
+                if Key = #27 then Perform(WM_NEXTDLGCTL,1,0);
 
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TCadastroCliente.ovbNovoClick(Sender: TObject);
 begin
-edit1.Clear;
-edit2.Clear;
-edit3.Clear;
-edit4.Clear;
-edit5.Clear;
-maskedit1.Clear;
-edit7.Clear;
-edit1.SetFocus;
+ovt_Codigo_Cliente.Clear;
+ovtNome.Clear;
+ovtEndereco.Clear;
+ovtBairro.Clear;
+ovtCidade.Clear;
+ovtTelefone.Clear;
+ovtEmail.Clear;
+ovt_Codigo_Cliente.SetFocus;
+
+end;
+
+
+
+procedure TCadastroCliente.FormShow(Sender: TObject);
+begin
+  AssignFile(arq, 'C:\Users\luiz.souza\Desktop\Nova pasta\cadastro.txt');
+  {$I-}
+    Reset(arq);
+    {$I+}
+       if (IOResult <> 0)
+        // arquivo não existe e será criado
+        then Rewrite(arq)
+          else begin
+             CloseFile(arq);
+                    //o arquivo existe e será aberto para saídas adicionais
+                   Append(arq);
+end;
+end;
+
+procedure TCadastroCliente.ovbGravarClick(Sender: TObject);
+
+begin
+     Lista := TStringList.Create;
+       Lista.Add(ovt_Codigo_Cliente.Text);
+         Lista.Add(ovtNome.Text);
+           Lista.Add(ovtEndereco.Text);
+             Lista.Add(ovtBairro.Text);
+              Lista.Add(ovtCidade.Text);
+                Lista.Add(ovtTelefone.Text);
+                  Lista.Add(ovtEmail.Text);
+                  ShowMessage(Lista.Text);
+
+
+
 
 end;
 

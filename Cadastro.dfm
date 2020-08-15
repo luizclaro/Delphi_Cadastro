@@ -1,6 +1,6 @@
-object Form1: TForm1
-  Left = 1914
-  Top = 188
+object CadastroCliente: TCadastroCliente
+  Left = 500
+  Top = 120
   Width = 579
   Height = 480
   Caption = 'Cadstro de Clientes'
@@ -11,9 +11,10 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object lblCodigoCliente: TLabel
     Left = 80
     Top = 64
     Width = 107
@@ -26,7 +27,7 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object Label2: TLabel
+  object lblNome: TLabel
     Left = 80
     Top = 128
     Width = 42
@@ -39,7 +40,7 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object Label3: TLabel
+  object lblEndereco: TLabel
     Left = 80
     Top = 192
     Width = 68
@@ -52,7 +53,7 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object Label4: TLabel
+  object lblBairro: TLabel
     Left = 80
     Top = 264
     Width = 43
@@ -65,7 +66,7 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object Label5: TLabel
+  object lblCidade: TLabel
     Left = 232
     Top = 264
     Width = 51
@@ -78,7 +79,7 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object Label6: TLabel
+  object lblTelefone: TLabel
     Left = 368
     Top = 264
     Width = 63
@@ -91,7 +92,7 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object Label7: TLabel
+  object lblEmail: TLabel
     Left = 80
     Top = 320
     Width = 45
@@ -130,51 +131,52 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object Button1: TButton
+  object ovbNovo: TButton
     Left = 80
     Top = 16
     Width = 75
     Height = 25
     Caption = 'Novo'
     TabOrder = 0
-    OnClick = Button1Click
+    OnClick = ovbNovoClick
   end
-  object Button2: TButton
+  object ovbGravar: TButton
     Left = 168
     Top = 16
     Width = 75
     Height = 25
     Caption = 'Gravar'
     TabOrder = 8
+    OnClick = ovbGravarClick
   end
-  object Button3: TButton
+  object ovbExcluir: TButton
     Left = 256
     Top = 16
     Width = 75
     Height = 25
     Caption = 'Excluir'
     TabOrder = 9
-    OnClick = Button3Click
+    OnClick = ovbExcluirClick
   end
-  object Button4: TButton
+  object ovbFechar: TButton
     Left = 344
     Top = 16
     Width = 75
     Height = 25
     Caption = 'Fechar'
     TabOrder = 10
-    OnClick = Button4Click
+    OnClick = ovbFecharClick
   end
-  object Edit1: TEdit
+  object ovt_Codigo_Cliente: TEdit
     Left = 80
     Top = 88
     Width = 121
     Height = 21
     MaxLength = 3
     TabOrder = 1
-    OnKeyPress = Edit1KeyPress
+    OnKeyPress = ovt_Codigo_ClienteKeyPress
   end
-  object Edit2: TEdit
+  object ovtNome: TEdit
     Left = 80
     Top = 152
     Width = 409
@@ -182,9 +184,9 @@ object Form1: TForm1
     CharCase = ecUpperCase
     MaxLength = 50
     TabOrder = 2
-    OnKeyPress = Edit2KeyPress
+    OnKeyPress = ovtNomeKeyPress
   end
-  object Edit3: TEdit
+  object ovtEndereco: TEdit
     Left = 80
     Top = 224
     Width = 409
@@ -192,9 +194,9 @@ object Form1: TForm1
     CharCase = ecUpperCase
     MaxLength = 100
     TabOrder = 3
-    OnKeyPress = Edit2KeyPress
+    OnKeyPress = ovtNomeKeyPress
   end
-  object Edit4: TEdit
+  object ovtBairro: TEdit
     Left = 80
     Top = 288
     Width = 121
@@ -202,9 +204,9 @@ object Form1: TForm1
     CharCase = ecUpperCase
     MaxLength = 50
     TabOrder = 4
-    OnKeyPress = Edit2KeyPress
+    OnKeyPress = ovtNomeKeyPress
   end
-  object Edit5: TEdit
+  object ovtCidade: TEdit
     Left = 224
     Top = 288
     Width = 121
@@ -212,18 +214,18 @@ object Form1: TForm1
     CharCase = ecUpperCase
     MaxLength = 50
     TabOrder = 5
-    OnKeyPress = Edit2KeyPress
+    OnKeyPress = ovtNomeKeyPress
   end
-  object Edit7: TEdit
+  object ovtEmail: TEdit
     Left = 80
     Top = 344
     Width = 409
     Height = 21
     MaxLength = 50
     TabOrder = 7
-    OnKeyPress = Edit7KeyPress
+    OnKeyPress = ovtEmailKeyPress
   end
-  object MaskEdit1: TMaskEdit
+  object ovtTelefone: TMaskEdit
     Left = 368
     Top = 288
     Width = 107
@@ -232,6 +234,6 @@ object Form1: TForm1
     MaxLength = 14
     TabOrder = 6
     Text = '(  )     -    '
-    OnKeyPress = MaskEdit1KeyPress
+    OnKeyPress = ovtTelefoneKeyPress
   end
 end
