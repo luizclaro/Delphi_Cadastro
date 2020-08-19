@@ -1,10 +1,10 @@
 object CadastroCliente: TCadastroCliente
-  Left = 500
-  Top = 120
+  Left = 374
+  Top = 108
   Width = 579
-  Height = 480
+  Height = 460
   Caption = 'Cadstro de Clientes'
-  Color = clSilver
+  Color = clGray
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clBlack
   Font.Height = -11
@@ -137,6 +137,12 @@ object CadastroCliente: TCadastroCliente
     Width = 75
     Height = 25
     Caption = 'Novo'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
     OnClick = ovbNovoClick
   end
@@ -146,6 +152,12 @@ object CadastroCliente: TCadastroCliente
     Width = 75
     Height = 25
     Caption = 'Gravar'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 8
     OnClick = ovbGravarClick
   end
@@ -155,6 +167,12 @@ object CadastroCliente: TCadastroCliente
     Width = 75
     Height = 25
     Caption = 'Excluir'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 9
     OnClick = ovbExcluirClick
   end
@@ -164,6 +182,12 @@ object CadastroCliente: TCadastroCliente
     Width = 75
     Height = 25
     Caption = 'Fechar'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 10
     OnClick = ovbFecharClick
   end
@@ -174,6 +198,7 @@ object CadastroCliente: TCadastroCliente
     Height = 21
     MaxLength = 3
     TabOrder = 1
+    OnChange = ovt_Codigo_ClienteChange
     OnKeyPress = ovt_Codigo_ClienteKeyPress
   end
   object ovtNome: TEdit
@@ -228,9 +253,9 @@ object CadastroCliente: TCadastroCliente
   object ovtTelefone: TMaskEdit
     Left = 368
     Top = 288
-    Width = 107
+    Width = 103
     Height = 21
-    EditMask = '!\(99\)00000-0000;1;_'
+    EditMask = '!\(99\)00000-0000;1;'
     MaxLength = 14
     TabOrder = 6
     Text = '(  )     -    '

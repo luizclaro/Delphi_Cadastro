@@ -2,7 +2,8 @@ program Projeto_cadastro;
 
 uses
   Forms,
-  Cadastro in 'Cadastro.pas' {CadastroCliente};
+  Cadastro in 'Cadastro.pas' {CadastroCliente},
+  uCliente in 'uCliente.pas';
 
 {$R *.res}
 
